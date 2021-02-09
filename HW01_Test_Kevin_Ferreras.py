@@ -5,7 +5,7 @@ class ClassifyTriangleTest(unittest.TestCase):
 
     def test_classify_triangle(self) -> None:
         '''Tests that classify_triangle() correctly classifies a triangle based on 3 given side lengths. 
-            classify_triangle should return one of the following strings: equilateral, isosceles, scalene, right'''
+            classify_triangle() should return one of the following strings: equilateral, isosceles, scalene, right'''
 
         self.assertEqual(classify_triangle(3, 3, 3), "equilateral")
         self.assertEqual(classify_triangle(4, 4, 6), "isosceles")
