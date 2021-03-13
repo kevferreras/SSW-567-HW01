@@ -1,40 +1,57 @@
+'''The purpose of this file is to create a program that
+    classifies triangles based on 3 given side lengths'''
+
 from typing import List, Tuple
 
-def classify_triangle(a: int, b: int, c: int) -> str:
-    '''Based on given side lengths (a, b, c), this function classifies a triangle as equilateral, isosceles, scalene, or right and  
-        returns the classification as a string'''
+def classify_triangle(side_a: int, side_b: int, side_c: int) -> None:
+    '''Based on given side lengths (side_a, side_b, side_c), this function classifies a triangle as
+    equilateral, isosceles, scalene, or right and returns the classification as a string'''
 
-    check_for_negative_side_lengths(a, b, c)
-    check_the_sum_of_two_sides(a, b, c)
+    check_for_negative_side_lengths(side_a, side_b, side_c)
+    check_the_sum_of_two_sides(side_a, side_b, side_c)
 
-    if a == b == c:
+    if side_a == side_b == side_c:
         return "equilateral"
-    elif a == b or a == c or b == c:
+
+    if side_a == side_b or side_a == side_c or side_b == side_c:
         return "isosceles"
-    elif (a ** 2 + b ** 2) == c ** 2:
+
+    if (side_a ** 2 + side_b ** 2) == side_c ** 2:
         return "right"
-    elif a != b != c:
+
+    if side_a != side_b != side_c:
         return "scalene"
 
-def check_for_negative_side_lengths(a: int, b: int, c: int) -> str:
-    '''Checks if any of the given side lengths for a triangle is negative. If a side is negative, then raises a ValuError'''
-    
-    for triangle_side_length in [a, b, c]:
-        if triangle_side_length < 0:
-            raise ValueError(f'The side with length {triangle_side_length} is a negative value. This is not a valid length for the side of a triangle.')
+    return None
 
-def check_the_sum_of_two_sides(a: int, b: int, c: int) -> None:
-    '''Checks the following triangle property: The sum of the length of any two sides of a triangle must be greater than the length of the third side.
+def check_for_negative_side_lengths(side_a: int, side_b: int, side_c: int) -> None:
+    '''Checks if any of the given side lengths for a triangle is negative.
+        If a side is negative, then raises a ValuError'''
+
+    for triangle_side_length in [side_a, side_b, side_c]:
+        if triangle_side_length < 0:
+            raise ValueError(f'''The side with length {triangle_side_length} is a negative value.
+                                This is not a valid length for the side of a triangle.''')
+
+def check_the_sum_of_two_sides(side_a: int, side_b: int, side_c: int) -> None:
+    '''Checks the following triangle property: The sum of the length of any two sides of a triangle
+        must be greater than the length of the third side.
         If the property is violated, than an ArithmeticError is raised'''
 
-    triangle_property_definition: str = 'The sum of the length of any two sides of a triangle must be greater than the length of the third side'
+    triangle_property_definition: str = '''The sum of the length of any two sides of a triangle
+                                            must be greater than the length of the third side'''
 
-    if a + b < c:
-        raise ArithmeticError (f'{triangle_property_definition}. {a} + {b} is not greater than {c}.')
-    elif a + c < b:
-        raise ArithmeticError (f'{triangle_property_definition}. {a} + {c} is not greater than {b}.')        
-    elif b + c < a:
-        raise ArithmeticError (f'{triangle_property_definition}. {b} + {c} is not greater than {a}.')        
+    if side_a + side_b < side_c:
+        raise ArithmeticError (f'''{triangle_property_definition}. {side_a} + {side_b}
+                                is not greater than {side_c}.''')
+
+    if side_a + side_c < side_b:
+        raise ArithmeticError (f'''{triangle_property_definition}. {side_a} + {side_c}
+                                is not greater than {side_b}.''')
+
+    if side_b + side_c < side_a:
+        raise ArithmeticError (f'''{triangle_property_definition}. {side_b} + {side_c}
+                                is not greater than {side_a}.''')
 
 def main() -> None:
     '''Prints out a triangle classification based on the sample inputs.
@@ -43,8 +60,8 @@ def main() -> None:
     sample_inputs: List[Tuple(int, int, int)] = [(3, 3, 3), (4, 4, 3), (5, 7, 9), (4, 3, 5)]
 
     for inputs in sample_inputs:
-        a, b, c = inputs
-        print(classify_triangle(a, b, c))
+        side_a, side_b, side_c = inputs
+        print(classify_triangle(side_a, side_b, side_c))
 
 
 if __name__ == "__main__":

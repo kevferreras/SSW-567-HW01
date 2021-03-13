@@ -1,4 +1,4 @@
-from HW01_Kevin_Ferreras import classify_triangle, check_for_negative_side_lengths, check_the_sum_of_two_sides
+from hw01_kevin_ferreras import classify_triangle, check_for_negative_side_lengths, check_the_sum_of_two_sides
 import unittest
 
 class ClassifyTriangleTest(unittest.TestCase):
