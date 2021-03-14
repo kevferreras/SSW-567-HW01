@@ -7,22 +7,37 @@ def classify_triangle(side_a: int, side_b: int, side_c: int) -> None:
     '''Based on given side lengths (side_a, side_b, side_c), this function classifies a triangle as
     equilateral, isosceles, scalene, or right and returns the classification as a string'''
 
+    check_if_input_is_string(side_a, side_b, side_c)
     check_for_negative_side_lengths(side_a, side_b, side_c)
     check_the_sum_of_two_sides(side_a, side_b, side_c)
+
+    right_triangle_flag: bool = check_if_right_triangle(side_a, side_b, side_c)
 
     if side_a == side_b == side_c:
         return "equilateral"
 
     if side_a == side_b or side_a == side_c or side_b == side_c:
-        return "isosceles"
-
-    if (side_a ** 2 + side_b ** 2) == side_c ** 2:
-        return "right"
+        if right_triangle_flag is True:
+            return "right isosceles"
+        if right_triangle_flag is False:
+            return "isosceles"
 
     if side_a != side_b != side_c:
-        return "scalene"
+        if right_triangle_flag is True:
+            return "right scalene"
+        if right_triangle_flag is False:
+            return "scalene"
 
     return None
+
+def check_if_input_is_string(side_a: int, side_b: int, side_c: int) -> None:
+    '''Checks if any of the given side lengths for a triangle is a string. If
+        a side is a string, raises a ValueError'''
+
+    for triangle_side_length in [side_a, side_b, side_c]:
+        if isinstance(triangle_side_length, str):
+            raise ValueError(f'''Please enter a numerical value for side
+                                length "{triangle_side_length}" ''')
 
 def check_for_negative_side_lengths(side_a: int, side_b: int, side_c: int) -> None:
     '''Checks if any of the given side lengths for a triangle is negative.
@@ -52,6 +67,12 @@ def check_the_sum_of_two_sides(side_a: int, side_b: int, side_c: int) -> None:
     if side_b + side_c < side_a:
         raise ArithmeticError (f'''{triangle_property_definition}. {side_b} + {side_c}
                                 is not greater than {side_a}.''')
+
+def check_if_right_triangle(side_a: int, side_b: int, side_c: int) -> bool:
+    '''Checks if the given sides of a triangle create a right triangle.
+        If the sides create a right triangle, then returns True, if not False'''
+
+    return bool((side_a ** 2 + side_b ** 2) == int(side_c ** 2))
 
 def main() -> None:
     '''Prints out a triangle classification based on the sample inputs.
