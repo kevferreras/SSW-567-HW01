@@ -2,7 +2,6 @@ from hw01_kevin_ferreras import (classify_triangle, check_if_input_is_string, ch
                                 check_the_sum_of_two_sides, check_if_right_triangle)
 import unittest
 import math
-from decimal import Decimal
 
 class ClassifyTriangleTest(unittest.TestCase):
 
